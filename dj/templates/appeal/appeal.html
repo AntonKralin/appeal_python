@@ -1,0 +1,15 @@
+{% extends  'appeal/base_generic.html' %}
+
+{% block content %}
+    <div class='container-fluid'>
+    <div class='row'>
+        <form action='/save_appeal' method='POST'>
+            {%csrf_token%}
+            <table>
+                {{appeal_form}}
+            </table>
+            <input type='submit' value='Сохранить' />
+        </form>
+    </div>
+    </div>
+{% endblock %}

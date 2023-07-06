@@ -1,0 +1,43 @@
+{% extends 'appeal/base_generic.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+    <div class='row'>
+        <div class='col-6'>
+            {% if users_list %}
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered w-auto">
+                    <thead>
+                        <th>Логин</th>
+                        <th>Доступ</th>
+                        <th>Инспекция</th>
+                    </thead>
+                    <tbody>
+                        {% for i_user in users_list %}
+                            <tr>
+                                <td>{{i_user.login}}</td>
+                                <td>{{i_user.access}}</td>
+                                <td>{{i_user.id_imns.shot_name}}</td>
+                                <td><a href='/users/{{i_user.id}}'>Изменить</a></td>
+                                <td><a href='/delete_user/{{i_user.id}}'>Удалить</a></td>
+                            </tr>
+                        {% endfor%}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class='col-6'>
+            <form action='/save_user' method='POST'>
+                {%csrf_token%}
+                <table>
+                    {{user_form}}
+                </table>
+                <input type='submit' value='Сохранить' />
+            </form>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

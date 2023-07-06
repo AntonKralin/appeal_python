@@ -1,0 +1,51 @@
+{% extends 'appeal/base_generic.html' %}
+
+{%block content %}
+    <div class="container-fluid">
+    <div class="row">
+        <p></p>
+        <div class='col-8'>
+            {% if imns_list %}
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered w-auto">
+                    <thead>
+                        <th>Код организации</th>
+                        <th>Название организации</th>
+                        <th>Короткое название организации</th>
+                        <th>Адрес</th>
+                        <th>Электронная почта</th>
+                        <th>Почта</th>
+                        <th>УНП</th>
+                    </thead>
+                    <tbody>
+                        {% for i_imns in imns_list.all %}
+                            <tr>
+                                <td>{{i_imns.number}}</td>
+                                <td>{{i_imns.name}}</td>
+                                <td>{{i_imns.shot_name}}</td>
+                                <td>{{i_imns.address}}</td>
+                                <td>{{i_imns.mail}}</td>
+                                <td>{{i_imns.post}}</td>
+                                <td>{{i_imns.unp}}</td>
+                                <td><a href='/imns/{{i_imns.id}}'>Изменить</a></td>
+                                <td><a href='/delete_imns/{{i_imns.id}}'>Удалить</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class='col-4'>
+            <form action='/save_imns' method='POST'>
+                {% csrf_token %}
+                <table>
+                    {{imns_form}}
+                </table>
+                <input type="submit" value="Сохранить" /> 
+            </form>
+        </div>
+    </div>
+    </div>
+{% endblock %}

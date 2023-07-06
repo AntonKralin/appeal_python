@@ -1,0 +1,19 @@
+{% extends 'appeal/base_generic.html' %}
+
+{% block content %}
+    <div class='container-fluid'>
+    <div class='row'>
+        <form action='viewreport' method='POST'>
+            {% csrf_token %}
+            <table>
+                {{report_form}}
+            </table>
+            <input type='submit' name='report_appeal' value='отчет по жалобам' />
+            <input type='submit' name='report_mail' value='отчет по письмам' />
+            <p></p>
+            <input type='submit' name='excel_report_appeal' value='excel отчет по жалобам' />
+            <input type='submit' name='excel_report_mail' value='excel отчет по письмам' />
+        </form>
+    </div>
+    </div>
+{% endblock %}
