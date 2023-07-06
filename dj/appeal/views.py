@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponsePermanentRedirect, HttpResponseNotFound, HttpResponse
 from django.conf import settings
+from django.core.paginator import Paginator
 from .models import Admins, Imns, Departments, Appeals
 from .forms import ImnsForm, DepartmentsForm, UserForm, AppealForm, ReportForm
 from . import const as const
@@ -35,7 +36,6 @@ def main(request:HttpRequest):
         return HttpResponseNotFound('пожалуйста зарегистрируйтесь')
     admin = Admins.objects.get(id=id_admin)
     
-    
     appeal_list = []
     if admin.access != 1:
         appeal_list = Appeals.objects.filter(id_imns=admin.id_imns)
@@ -46,9 +46,15 @@ def main(request:HttpRequest):
     for i_appeal in appeal_list:
         i_appeal.message = str(i_appeal.date) + " / " + i_appeal.message
         table_list.append(i_appeal)
+        
+    page = request.GET.get('page', 1)
+    paginator = Paginator(table_list, 10)
+    page_obj = paginator.get_page(page)
     
-    context = {'table_list': table_list,
-               'access': admin.access}
+    context = {'access': admin.access,
+               'page_obj': page_obj,
+               'is_paginated': True,
+               'page_url': 'main'}
     
     return render(request, 'appeal/main.html', context=context)
 
@@ -348,8 +354,9 @@ def view_report(request:HttpRequest):
                         return response
             
             context = {'access': admin.access,
-                       'table_list': table_list}
-            return render(request, 'appeal/main.html', context=context)
+                    'table_list': table_list,
+                    'is_paginated': True}
+            return render(request, 'appeal/viewreport.html', context=context)
             
     return HttpResponseNotFound('request error')
 

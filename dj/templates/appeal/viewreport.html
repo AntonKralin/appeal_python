@@ -18,7 +18,7 @@
                     <th></th>
                 </thead>
                 <tbody>                        
-                    {%for i_appeal in page_obj %}
+                    {%for i_appeal in table_list %}
                         <tr>
                         <td>{{i_appeal.id}}</td>
                         <td>{{i_appeal.message}}</td>
@@ -34,34 +34,8 @@
                     {% endfor %}
                 </tbody>
             </table>
-            {% block paginator %}
-                {% if is_paginated %}
-                    <div class='pagination'>
-                        <span class='page-links'>
-                            {% if page_obj.has_previous %}
-                                <a href="{{request.path}}?page={{page_obj.previous_page_number}}">Предыдущая</a>
-                                {% endif %}
-                                <span class="page-current">
-                                    Страница {{page_obj.number}} из {{page_obj.paginator.num_pages}}.
-                                </span>
-                                {% if page_obj.has_next%}
-                                    <a href="{{request.path}}?page={{page_obj.next_page_number}}">Следующая</a>
-                            {% endif %}
-                            {% for page_number in page_obj.paginator.page_range %}
-                                <a
-                                    href="/{{page_url}}?page={{page_number}}"
-                                    class="{% if page_number == page_obj.number %}current{% endif %}"
-                                >
-                                    {{page_number}}
-                                </a>
-                            {% endfor %}
-                        </span>
-                    </div>
-                    <p></p>
-                    <br>
-                    <br>
-                {% endif %}
-            {% endblock %}
+            <br>
+            <br>
         </div>
     </div>
     </div>
