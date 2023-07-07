@@ -54,6 +54,7 @@ def main(request:HttpRequest):
     context = {'access': admin.access,
                'page_obj': page_obj,
                'is_paginated': True,
+               'login': admin.login,
                'page_url': 'main'}
     
     return render(request, 'appeal/main.html', context=context)
@@ -82,8 +83,10 @@ def imns(request:HttpRequest, id:int=None):
         imns_form.fields['address'].initial = imns.address
         imns_form.fields['unp'].initial = imns.unp
     
-    context = {'imns_form': imns_form, 'imns_list': imns_list,
-               'access': admin.access}
+    context = {'imns_form': imns_form, 
+               'imns_list': imns_list,
+               'access': admin.access,
+               'login': admin.login}
     return render(request, 'appeal/imns.html', context=context)
 
 def save_imns(request:HttpRequest):
@@ -135,6 +138,7 @@ def departments(request:HttpRequest, id:int=None):
     
     context = {"departments_form": departments_form,
                "access": admin.access,
+               'login': admin.login,
                "departments_list": departments_list}
     return render(request, 'appeal/departments.html', context=context)
 
@@ -192,6 +196,7 @@ def users(request:HttpRequest, id:int=None):
     
     context = {"user_form": user_form,
                "users_list": users_list,
+               'login': admin.login,
                "access": admin.access}
     
     return render(request, 'appeal/users.html', context=context)
@@ -257,6 +262,7 @@ def appeal(request:HttpRequest, id:int=None):
         appeal_form.initial['imns'] = appeal.imns.split(' ')
     
     context = {'appeal_form': appeal_form,
+               'login': admin.login,
                'access': admin.access}
     
     return render(request, 'appeal/appeal.html', context=context)
@@ -302,6 +308,7 @@ def report(request:HttpRequest):
         report_form = ReportForm()
         
         context = {'access': admin.access,
+                   'login': admin.login,
                    'report_form': report_form}
         
         return render(request, 'appeal/reports.html', context=context)
@@ -355,6 +362,7 @@ def view_report(request:HttpRequest):
             
             context = {'access': admin.access,
                     'table_list': table_list,
+                    'login': admin.login,
                     'is_paginated': True}
             return render(request, 'appeal/viewreport.html', context=context)
             
