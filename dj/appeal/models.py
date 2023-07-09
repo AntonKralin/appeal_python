@@ -34,6 +34,7 @@ class Appeals(models.Model):
     class Meta:
         managed = False
         db_table = 'appeals'
+        ordering = ["-id"]
 
 
 class Departments(models.Model):

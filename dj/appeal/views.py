@@ -176,7 +176,7 @@ def users(request:HttpRequest, id:int=None):
         user_form.fields['id'].initial = user.id
         user_form.fields['login'].initial = user.login
         user_form.initial['access'] = user.access
-        user_form.initial['imns'] = user.id_imns.id
+        user_form.initial['imns'] = user.id_imns
     
     users_list = []
     if admin.access != 1:
@@ -219,7 +219,7 @@ def save_user(request:HttpRequest):
         user.login = login
         user.password = password1
         user.access = access
-        user.id_imns = Imns.objects.get(id=id_imns)
+        user.id_imns = id_imns
         user.save()
     
     return HttpResponsePermanentRedirect('/users')
