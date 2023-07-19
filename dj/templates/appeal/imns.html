@@ -27,18 +27,20 @@
                                 <td>{{i_imns.mail}}</td>
                                 <td>{{i_imns.post}}</td>
                                 <td>{{i_imns.unp}}</td>
-                                <td><a href='/imns/{{i_imns.id}}'>Изменить</a></td>
-                                <td><a href='/delete_imns/{{i_imns.id}}'>Удалить</a></td>
+                                <td><a href="{%url 'appeal:edit_imns' id=i_imns.id%}">Изменить</a></td>
+                                <td><a href="{%url 'appeal:delete_imns' id=i_imns.id%}">Удалить</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
+                <br>
+                <br>
             </div>
             {% endif %}
         </div>
         
         <div class='col-4'>
-            <form action='/save_imns' method='POST'>
+            <form action="{%url 'appeal:save_imns'%}" method='POST'>
                 {% csrf_token %}
                 <table>
                     {{imns_form}}

@@ -15,8 +15,8 @@
                             <tr>
                                 <td>{{i_departments.name}}</td>
                                 {% if access == 1 %}
-                                <td><a href='/departments/{{i_departments.id}}'>Изменить</a></td>
-                                <td><a href='/delete_departments/{{i_departments.id}}'>Удалить</a></td>
+                                <td><a href="{%url 'appeal:edit_departments' id=i_departments.id%}">Изменить</a></td>
+                                <td><a href="{%url 'appeal:delete_departments' id=i_departments.id%}">Удалить</a></td>
                                 {%endif%}
                             </tr>
                         {% endfor %}
@@ -28,7 +28,7 @@
 
         <div class="col-6">
             {% if access == 1 %}
-            <form action='/save_departments' method="POST">
+            <form action="{%url 'appeal:save_departments'%}" method="POST">
                 {% csrf_token %}
                 <table>
                     {{departments_form}}

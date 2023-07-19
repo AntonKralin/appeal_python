@@ -18,8 +18,8 @@
                                 <td>{{i_user.login}}</td>
                                 <td>{{i_user.access}}</td>
                                 <td>{{i_user.id_imns.shot_name}}</td>
-                                <td><a href='/users/{{i_user.id}}'>Изменить</a></td>
-                                <td><a href='/delete_user/{{i_user.id}}'>Удалить</a></td>
+                                <td><a href="{%url 'appeal:edit_user' id=i_user.id%}">Изменить</a></td>
+                                <td><a href="{%url 'appeal:delete_user' id=i_user.id%}">Удалить</a></td>
                             </tr>
                         {% endfor%}
                     </tbody>
@@ -29,7 +29,7 @@
         </div>
 
         <div class='col-6'>
-            <form action='/save_user' method='POST'>
+            <form action="{%url 'appeal:save_user'%}" method='POST'>
                 {%csrf_token%}
                 <table>
                     {{user_form}}

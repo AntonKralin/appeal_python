@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views
 
-appealurlpatterns = [
-    path('', views.index, name='index'),
+app_name = 'appeal'
+
+urlpatterns = [
+    path('', views.index, name='free'),
     path('index', views.index, name='index'),
     path('main', views.main, name='main'),
     path('imns/<int:id>', views.imns, name='edit_imns'),
@@ -19,7 +21,7 @@ appealurlpatterns = [
     path('delete_user/<int:id>', views.delete_user, name='delete_user'),
     path('appeal/<int:id>', views.appeal, name='edit_appeal'),
     path('appeal', views.appeal, name='appeal'),
-    path('save_appeal', views.save_appeal, name='save_apppeal'),
+    path('save_appeal', views.save_appeal, name='save_appeal'),
     path('report', views.report, name='report'),
     path('viewreport', views.view_report, name='view_report'),
     path('clear_session', views.clear_session, name='clear_session'),

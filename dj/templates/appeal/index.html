@@ -86,7 +86,7 @@
 
 <body class="text-center">
     <main class="form-signin w-100 m-auto">
-        <form method="POST" action="index">
+        <form method="POST" action="{%url 'appeal:index'%}">
             {% csrf_token %}
               <img class="mb-4" src="{%static 'appeal/img/bootstrap-logo.svg' %}" alt="" width="72" height="57">
               <h1 class="h3 mb-3 fw-normal">Пожалуйста залогиньтесь</h1>

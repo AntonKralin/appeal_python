@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpRequest, HttpResponsePermanentRedirect, HttpResponseNotFound, HttpResponse
+from django.shortcuts import render, redirect
+from django.http import HttpRequest, HttpResponseNotFound, HttpResponse
 from django.conf import settings
 from django.core.paginator import Paginator
 from .models import Admins, Imns, Departments, Appeals
@@ -27,7 +27,7 @@ def index(request:HttpRequest):
             context = {"message": "Введите правильный логин/пароль"}
             return render(request, 'appeal/index.html', context=context)
         request.session['admin'] = admin.id
-        return HttpResponsePermanentRedirect('/main')
+        return redirect('appeal:main')
     return render(request, 'appeal/index.html')
 
 def main(request:HttpRequest):
@@ -113,14 +113,14 @@ def save_imns(request:HttpRequest):
     imns.mail = mail
     imns.save()
     
-    return HttpResponsePermanentRedirect('/imns')
+    return redirect('appeal:imns')
 
 def delete_imns(request:HttpRequest, id:int=None):
     id_admin = request.session.get('admin', None)
     if id and id_admin:
        imns = Imns.objects.get(id=id)
        imns.delete()
-    return HttpResponsePermanentRedirect('/imns') 
+    return redirect('appeal:imns')
 
 def departments(request:HttpRequest, id:int=None):
     id_admin = request.session.get('admin', None)
@@ -153,7 +153,7 @@ def save_departments(request:HttpRequest):
     department.name = name
     department.save()
         
-    return HttpResponsePermanentRedirect('/departments')
+    return redirect('appeal:departments')
 
 def delete_departments(request:HttpRequest, id:int=None):
     id_admin = request.session.get('admin', None)
@@ -161,7 +161,7 @@ def delete_departments(request:HttpRequest, id:int=None):
         department = Departments.objects.get(id=id)
         department.delete()
     
-    return HttpResponsePermanentRedirect('/departments')
+    return redirect('appeal:departments')
 
 def users(request:HttpRequest, id:int=None):
     id_admin = request.session.get('admin', None)
@@ -222,14 +222,14 @@ def save_user(request:HttpRequest):
         user.id_imns = id_imns
         user.save()
     
-    return HttpResponsePermanentRedirect('/users')
+    return redirect('appeal:users')
 
 def delete_user(request:HttpRequest, id:int=None):
     id_admin = request.session.get('admin', None)
     if id_admin and id:
         user = Admins.objects.get(id=id)
         user.delete()
-    return HttpResponsePermanentRedirect('/users')
+    return redirect('appeal:users')
 
 def appeal(request:HttpRequest, id:int=None):
     id_admin = request.session.get('admin', None)
@@ -297,7 +297,7 @@ def save_appeal(request:HttpRequest):
         appeal.id_imns = admin.id_imns
         appeal.imns = " ".join(imns)
         appeal.save()
-    return HttpResponsePermanentRedirect('/main')
+    return redirect('appeal:main')
 
 def report(request:HttpRequest):
     id_admin = request.session.get('admin', None)
@@ -371,4 +371,4 @@ def view_report(request:HttpRequest):
 def clear_session(request:HttpRequest):
     request.session.clear()
     request.session.modified = True
-    return HttpResponsePermanentRedirect('/index')
+    return redirect('appeal:index')

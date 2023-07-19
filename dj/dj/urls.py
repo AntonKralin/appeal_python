@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from appeal.urls import appealurlpatterns
+
 
 urlpatterns = [
-    path('', include(appealurlpatterns)),
+    path('1', include('appeal.urls', namespace='appeal')),
     path('admin/', admin.site.urls),
 ]

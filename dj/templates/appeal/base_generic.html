@@ -17,9 +17,9 @@
     <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark"> 
         <div class="container-fluid"> 
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                <a class="navbar-brand" href="/main">Главная</a>
-                <a class="navbar-brand" href="/appeal">Новая жалоба</a>
-                <a class="navbar-brand" href="/report">Отчеты</a>
+                <a class="navbar-brand" href="{%url 'appeal:main'%}">Главная</a>
+                <a class="navbar-brand" href="{%url 'appeal:appeal'%}">Новая жалоба</a>
+                <a class="navbar-brand" href="{%url 'appeal:report'%}">Отчеты</a>
             </ul>
 
             <form class="d-flex">
@@ -28,9 +28,9 @@
                     <li class="nav-item dropup">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Управление</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdown10">
-                            <li><a class="dropdown-item" href="/users">Пользователь</a></li>
-                            <li><a class="dropdown-item" href="/departments">Подразделения</a></li>
-                            <li><a class="dropdown-item" href="/imns">Инспекции</a></li>
+                            <li><a class="dropdown-item" href="{%url 'appeal:users'%}">Пользователь</a></li>
+                            <li><a class="dropdown-item" href="{%url 'appeal:departments'%}">Подразделения</a></li>
+                            <li><a class="dropdown-item" href="{%url 'appeal:imns'%}">Инспекции</a></li>
                         </ul>
                     </li>
                     {% endif %}
@@ -38,7 +38,7 @@
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{login}}</a>
                     </li> 
-                <a class="navbar-brand" aria-current="page" href="/clear_session">Выход</a>
+                <a class="navbar-brand" aria-current="page" href="{%url 'appeal:clear_session'%}">Выход</a>
             </form>
         </div>
     </nav>
