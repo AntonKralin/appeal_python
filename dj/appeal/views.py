@@ -243,7 +243,8 @@ def appeal(request:HttpRequest, id:int=None):
     appeal_form.fields['unit'].choices = dep_select
     imns_select = []
     if admin.access != 1:
-        imns_select = [(admin.id_imns.number, admin.id_imns.number)]
+        imns = Imns.objects.get(id=admin.id_imns)
+        imns_select = [(imns.number, imns.number)]
     else:
         imns_select = imns_query_to_select_number(Imns.objects.all())
     appeal_form.fields['imns'].choices = imns_select
